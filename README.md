@@ -16,6 +16,12 @@ npx skills add robdefeo/agent-skills
 
 Guide the Amazon Working Backwards process from the 5 Questions through to a full PR-FAQ document.
 
+**Installation:**
+
+```
+npx skills add robdefeo/agent-skills/amazon-working-backwards
+```
+
 **Use when:**
 
 - Drafting answers to the Amazon 5 Questions for a proposal or idea
