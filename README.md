@@ -7,7 +7,7 @@ Skills follow the [Agent Skills](https://agentskills.io/) format and are publish
 ## Installation
 
 ```
-npx skills add robdefeo/agent-skills
+npx skills add https://github.com/robdefeo/agent-skills
 ```
 
 ## Available Skills
@@ -19,7 +19,7 @@ Guide the Amazon Working Backwards process from the 5 Questions through to a ful
 **Installation:**
 
 ```
-npx skills add robdefeo/agent-skills/amazon-working-backwards
+npx skills add https://github.com/robdefeo/agent-skills --skill amazon-working-backwards
 ```
 
 **Use when:**
