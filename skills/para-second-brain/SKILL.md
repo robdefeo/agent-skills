@@ -1,6 +1,6 @@
 ---
 name: para-second-brain
-description: Use this skill when the user wants to organize, classify, or maintain a PARA-method second brain. Triggers include asking where to file something, distinguishing projects from areas, processing an inbox, setting up a new project, completing or archiving a project, running a monthly review, validating system structure, or finding stale/orphaned content. Keywords: PARA, second brain, projects vs areas, inbox processing, Forte Labs, file this, where does this go, monthly review, archive project, system health.
+description: Use this skill when the user wants to organize, classify, or maintain a PARA-method second brain. Triggers include asking where to file something, distinguishing projects from areas, processing an inbox, setting up a new project, completing or archiving a project, running a monthly review, validating system structure, or finding stale/orphaned content.
 ---
 
 # PARA Method
