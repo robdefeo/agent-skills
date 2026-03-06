@@ -12,6 +12,23 @@ npx skills add https://github.com/robdefeo/agent-skills
 
 ## Available Skills
 
+### diataxis-documentation-guidance
+
+Classify, scope, split, draft, and review documentation using the Diataxis framework.
+
+**Installation:**
+
+```
+npx skills add https://github.com/robdefeo/agent-skills --skill diataxis-documentation-guidance
+```
+
+**Use when:**
+
+- Classifying a documentation topic as tutorial, how-to guide, reference, or explanation
+- Splitting mixed-mode pages into focused companion docs
+- Drafting or rewriting docs in an explicit Diataxis mode
+- Validating doc outputs with a concrete verification checklist
+
 ### amazon-working-backwards
 
 Guide the Amazon Working Backwards process from the 5 Questions through to a full PR-FAQ document.
@@ -47,12 +64,3 @@ npx skills add https://github.com/robdefeo/agent-skills --skill para-second-brai
 - Running inbox processing, monthly reviews, project setup, completion, or archiving workflows
 - Troubleshooting stale projects, orphaned files, or structure issues
 - Validating second brain structure and project health with `scripts/validate.sh`
-
-## Skill Structure
-
-Each skill contains:
-
-- `SKILL.md` — Instructions for the agent
-- `references/` — Supporting documentation (optional)
-- `scripts/` — Helper scripts for automation (optional)
-- `assets/` — Files used in output (optional)
