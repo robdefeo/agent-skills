@@ -35,7 +35,7 @@ query($owner:String!,$repo:String!,$pr:Int!){
         nodes{
           id isResolved isOutdated
           comments(first:50){
-            nodes{ id author{login} body path line originalLine url createdAt }
+            nodes{ id databaseId author{login} body path line originalLine url createdAt }
           }
         }
       }
@@ -43,6 +43,10 @@ query($owner:String!,$repo:String!,$pr:Int!){
   }
 }' -F owner=OWNER -F repo=REPO -F pr=PR_NUMBER
 ```
+
+After fetching, filter to unresolved threads only (`isResolved == false`) before evaluation. Threads with `isOutdated == true` should be flagged `[outdated]` and defaulted to `skip`.
+
+> **Known limit:** `reviewThreads(first:100)` and `comments(first:50)` do not paginate. PRs with more than 100 threads or 50 comments per thread will be silently truncated.
 
 Fetch general PR comments:
 
@@ -144,6 +148,15 @@ gh api repos/OWNER/REPO/pulls/PR_NUMBER/comments/COMMENT_ID/replies \
   -X POST --field body="Fixed in \`$HASH_API\` — switched to try_init() and added a warn! on dropped send."
 ```
 
+> **Note:** `COMMENT_ID` must be the numeric REST API ID — use the `databaseId` field from the GraphQL response, not the node `id` (e.g. `PRRC_kwDO…`).
+
+**Post replies** (general PR comments — no thread; post a new top-level comment):
+
+```bash
+gh api repos/OWNER/REPO/issues/PR_NUMBER/comments \
+  -X POST --field body="Fixed in \`$HASH\` — {one-line description}."
+```
+
 **For deferred items, open a follow-up issue first**, then include the URL in the reply:
 
 ```bash
@@ -173,3 +186,4 @@ Reply to **every** evaluated thread — no comment should be left without a resp
 - **Outdated inline comments** → `[outdated]` tag in plan, default `skip`.
 - **Pure bot boilerplate** → filtered in Step 1; never reach the plan table.
 - **User rejects the whole plan** → no commits, no replies, no issues created.
+- **Large PRs (>100 threads or >50 comments/thread)** → fetch is silently truncated; warn the user and process only what was returned. See [issue #2](https://github.com/robdefeo/agent-skills/issues/2) for full pagination support.
