@@ -64,3 +64,21 @@ npx skills add https://github.com/robdefeo/agent-skills --skill para-second-brai
 - Running inbox processing, monthly reviews, project setup, completion, or archiving workflows
 - Troubleshooting stale projects, orphaned files, or structure issues
 - Validating second brain structure and project health with `scripts/validate.sh`
+
+### pr-address-feedback
+
+Address GitHub PR review feedback end-to-end: fetch comments, propose a fix/skip/defer plan for approval, group changes into logical commits, push once, then reply to every thread with a commit hash, skip reasoning, or follow-up issue link.
+
+**Installation:**
+
+```
+npx skills add https://github.com/robdefeo/agent-skills --skill pr-address-feedback
+```
+
+**Use when:**
+
+- Addressing or responding to review comments on an open GitHub PR
+- Triaging a mix of reviewer and bot (CodeRabbit, Copilot) comments into fix / doc-only / skip / defer
+- Grouping follow-up changes into logical, conventional-commit-formatted commits
+- Opening follow-up issues for out-of-scope suggestions and linking them in replies
+- Resolving review threads on GitHub after they've been addressed
