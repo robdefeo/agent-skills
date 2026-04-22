@@ -1,6 +1,6 @@
 ---
 name: pr-address-feedback
-description: Address GitHub PR review feedback end-to-end. Fetch comments, propose a fix/skip/defer plan for user approval, group changes into logical commits, push once, then reply to every thread with a commit hash, skip reasoning, or follow-up issue link. Requires `gh` CLI. Triggers on "address PR comments", "respond to review feedback", "fix PR review", "handle PR comments".
+description: Use this skill whenever the user wants to address, respond to, work through, or handle GitHub PR review comments — including code review feedback, reviewer suggestions, bot comments, or requested changes — even if they don't say "address". Handles the full end-to-end workflow: fetch threads, plan fixes, commit, push, and reply. Requires `gh` CLI.
 ---
 
 # PR Address Feedback
@@ -112,6 +112,8 @@ Group related changes into logical units. Canonical groups:
 
 Conventional Commits: `type(scope): subject`
 
+Capture the **full 40-character commit hash** with `git rev-parse HEAD` (not `--short`). Replies in Step 6 must use the full hash so the link stays stable even if GitHub's short-hash collision threshold shifts.
+
 ```bash
 git add crates/tracer/src/lib.rs
 git commit -m "docs(tracer): clarify async write and flush guarantees"
@@ -134,7 +136,7 @@ Record a `comment_id → hash` map as you commit. Used in Step 6.
 
 ## Step 6 — Reply, resolve, file follow-ups
 
-**Reply templates:**
+**Reply templates** — `{hash}` is always the full 40-character commit SHA captured in Step 5:
 
 - **Fixed:** `` Fixed in `{hash}` — {one-line description of what changed}. ``
 - **Doc-only:** `` Clarified in `{hash}` — {what was clarified}. ``
