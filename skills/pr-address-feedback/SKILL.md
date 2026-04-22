@@ -1,6 +1,6 @@
 ---
 name: pr-address-feedback
-description: Use this skill whenever the user wants to address, respond to, work through, or handle GitHub PR review comments — including code review feedback, reviewer suggestions, bot comments, or requested changes — even if they don't say "address". Handles the full end-to-end workflow: fetch threads, plan fixes, commit, push, and reply. Requires `gh` CLI.
+description: "Use this skill whenever the user wants to address, respond to, work through, or handle GitHub PR review comments — including code review feedback, reviewer suggestions, bot comments, or requested changes — even if they don't say \"address\". Handles the full end-to-end workflow: fetch threads, plan fixes, commit, push, and reply. Requires `gh` CLI."
 ---
 
 # PR Address Feedback
