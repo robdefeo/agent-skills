@@ -82,3 +82,21 @@ npx skills add https://github.com/robdefeo/agent-skills --skill pr-address-feedb
 - Grouping follow-up changes into logical, conventional-commit-formatted commits
 - Opening follow-up issues for out-of-scope suggestions and linking them in replies
 - Resolving review threads on GitHub after they've been addressed
+
+### pr-create
+
+Open a new GitHub pull request from the current branch: preflight checks, Conventional Commits title, a Summary that leads with *why*, auto-linked issue references, optional repo template support, then push and create. No AI attribution trailers.
+
+**Installation:**
+
+```
+npx skills add https://github.com/robdefeo/agent-skills --skill pr-create
+```
+
+**Use when:**
+
+- Opening, creating, or raising a new PR from the current feature branch
+- Drafting a PR title in Conventional Commits format from the commits on the branch
+- Writing a PR Summary that covers the *why* and *what* without restating the diff
+- Respecting a repo's `.github/pull_request_template.md` when one exists
+- Auto-linking `Closes #NNN` / `Refs #NNN` from commit messages and branch name
