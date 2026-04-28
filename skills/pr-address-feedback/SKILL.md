@@ -136,10 +136,10 @@ Record a `comment_id → hash` map as you commit. Used in Step 6.
 
 ## Step 6 — Reply, resolve, file follow-ups
 
-**Reply templates** — `{hash}` is always the full 40-character commit SHA captured in Step 5:
+**Reply templates** — {hash} is always the full 40-character commit SHA captured in Step 5:
 
-- **Fixed:** `` Fixed in `{hash}` — {one-line description of what changed}. ``
-- **Doc-only:** `` Clarified in `{hash}` — {what was clarified}. ``
+- **Fixed:** `` Fixed in {hash} — {one-line description of what changed}. ``
+- **Doc-only:** `` Clarified in {hash} — {what was clarified}. ``
 - **Skipped:** `Won't fix — {concise reason rooted in design intent or scope}.`
 - **Deferred:** `Out of scope for this PR — tracked in {issue_url}.`
 
