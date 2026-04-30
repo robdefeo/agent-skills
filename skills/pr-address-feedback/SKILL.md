@@ -12,7 +12,7 @@ description: "Use this skill whenever the user wants to address, respond to, wor
 3. **Propose plan** as a numbered table; wait for user approval. User edits by row number.
 4. **Apply changes** grouped by concern (docs / tests / api / refactor / error-handling).
 5. **Commit each group** with Conventional Commits; **push once** when all groups are done.
-6. **Reply** to every thread, **resolve** fixed/doc/deferred threads, and **file follow-up issues** for deferred items.
+6. **File follow-up issues** for deferred items, **reply** to every thread, and **resolve** fixed/doc/deferred threads.
 
 ---
 
@@ -134,14 +134,31 @@ Record a `comment_id → hash` map as you commit. Used in Step 6.
 
 ---
 
-## Step 6 — Reply, resolve, file follow-ups
+## Step 6 — File follow-ups, reply, resolve
 
-**Reply templates** — {hash} is always the full 40-character commit SHA captured in Step 5:
+These run **in order**. Do not start 6b until 6a is complete for every `defer` row — a deferred reply without a real issue URL is invalid.
+
+### 6a — File follow-up issues (deferred items only)
+
+For every `defer` row, create the issue first and capture its URL. Build a `comment_id → issue_url` map alongside the `comment_id → hash` map from Step 5.
+
+```bash
+ISSUE_URL=$(gh issue create \
+  --title "Add connection pooling to db layer" \
+  --body "Follow-up from #PR_NUMBER (thread: COMMENT_URL).\n\nContext: reviewer flagged missing pooling in src/db.rs:120. Out of scope for the current PR — tracking here." \
+  | tail -1)
+```
+
+If `gh issue create` fails or returns no URL, **stop** — do not post the deferred reply with a placeholder.
+
+### 6b — Reply to every thread
+
+Reply templates — `{hash}` is the full 40-character commit SHA from Step 5; `{issue_url}` is the URL captured in 6a:
 
 - **Fixed:** `` Fixed in {hash} — {one-line description of what changed}. ``
 - **Doc-only:** `` Clarified in {hash} — {what was clarified}. ``
 - **Skipped:** `Won't fix — {concise reason rooted in design intent or scope}.`
-- **Deferred:** `Out of scope for this PR — tracked in {issue_url}.`
+- **Deferred:** `` Out of scope for this PR — tracked in {issue_url}. `` — `{issue_url}` is **required** and must be a real GitHub issue URL from 6a. Never substitute a phrase like "tracked for follow-up" or "will address later".
 
 **Post replies** (inline review threads):
 
@@ -159,16 +176,11 @@ gh api repos/OWNER/REPO/issues/PR_NUMBER/comments \
   -X POST --field body="Fixed in \`$HASH\` — {one-line description}."
 ```
 
-**For deferred items, open a follow-up issue first**, then include the URL in the reply:
+Reply to **every** evaluated thread — no comment should be left without a response.
 
-```bash
-ISSUE_URL=$(gh issue create \
-  --title "Add connection pooling to db layer" \
-  --body "Follow-up from #PR_NUMBER (thread: COMMENT_URL).\n\nContext: reviewer flagged missing pooling in src/db.rs:120. Out of scope for the current PR — tracking here." \
-  | tail -1)
-```
+### 6c — Resolve threads
 
-**Resolve threads** for `fix`, `doc-only`, and `defer`. Leave `skip` threads open so the reviewer can push back.
+Resolve threads for `fix`, `doc-only`, and `defer`. Leave `skip` threads open so the reviewer can push back.
 
 ```bash
 gh api graphql -f query='
@@ -176,8 +188,6 @@ mutation($id:ID!){
   resolveReviewThread(input:{threadId:$id}){ thread{ isResolved } }
 }' -F id=THREAD_ID
 ```
-
-Reply to **every** evaluated thread — no comment should be left without a response.
 
 ---
 
