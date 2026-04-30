@@ -164,7 +164,7 @@ Reply templates — `{hash}` is the full 40-character commit SHA from Step 5; `{
 
 ```bash
 gh api repos/OWNER/REPO/pulls/PR_NUMBER/comments/COMMENT_ID/replies \
-  -X POST --field body="Fixed in \`$HASH_API\` — switched to try_init() and added a warn! on dropped send."
+  -X POST --field body="Fixed in $HASH_API — switched to try_init() and added a warn! on dropped send."
 ```
 
 > **Note:** `COMMENT_ID` must be the numeric REST API ID — use the `databaseId` field from the GraphQL response, not the node `id` (e.g. `PRRC_kwDO…`).
@@ -173,7 +173,7 @@ gh api repos/OWNER/REPO/pulls/PR_NUMBER/comments/COMMENT_ID/replies \
 
 ```bash
 gh api repos/OWNER/REPO/issues/PR_NUMBER/comments \
-  -X POST --field body="Fixed in \`$HASH\` — {one-line description}."
+  -X POST --field body="Fixed in $HASH — {one-line description}."
 ```
 
 Reply to **every** evaluated thread — no comment should be left without a response.
