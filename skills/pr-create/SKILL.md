@@ -125,11 +125,6 @@ If the branch has a single commit, reuse its subject when it already follows Con
 
 <2–4 sentences. Lead with *why* — the problem, the user need, the constraint that forced this. Then *what* — the concrete change. Avoid restating the diff.>
 
-## Changes
-
-- <bullet per meaningful change, grouped by concern>
-- <…>
-
 Closes #NNN
 ```
 
@@ -165,9 +160,6 @@ Draft:  no
 ## Summary
 …
 
-## Changes
-- …
-
 Closes #42
 ---
 ```
@@ -196,12 +188,6 @@ gh pr create \
 ## Summary
 
 Span export was blocking the agent loop under load because the exporter flushed synchronously on every span. This moves writes to a background task with a bounded channel so the hot path stays non-blocking.
-
-## Changes
-
-- Replace synchronous `flush()` with a background writer task
-- Add bounded channel with `warn!` on dropped sends
-- Cover writer shutdown in `tracer::tests::shutdown_drains_queue`
 
 Closes #42
 EOF
