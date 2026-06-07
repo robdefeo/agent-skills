@@ -3,3 +3,6 @@
 node_modules/
 .opencode
 # openspec
+
+# Local-only working notes
+SCRATCH.md

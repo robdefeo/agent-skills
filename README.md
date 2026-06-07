@@ -100,3 +100,21 @@ npx skills add https://github.com/robdefeo/agent-skills --skill pr-create
 - Writing a PR Summary that covers the *why* and *what* without restating the diff
 - Respecting a repo's `.github/pull_request_template.md` when one exists
 - Auto-linking `Closes #NNN` / `Refs #NNN` from commit messages and branch name
+
+### skill-scope
+
+Decide the shape of a Claude skill before `skill-creator` builds: produce a `NEW` / `EXTEND` / `SPLIT` / `MERGE` verdict with an explicit responsibility statement. Has a fast-path for already-scoped cases and falls back to five scoping tests (atomic responsibility, trigger timing, overlap, scope drift, duplicate responsibility) when scope is unclear.
+
+**Installation:**
+
+```
+npx skills add https://github.com/robdefeo/agent-skills --skill skill-scope
+```
+
+**Use when:**
+
+- Creating a new skill before writing SKILL.md
+- Deciding if an existing skill is too broad or too narrow
+- Splitting one skill into two or merging two into one
+- Deciding whether a workflow needs a new skill at all vs. extending an existing one
+- Resolving overlap between a proposed skill and an existing one
