@@ -6,6 +6,7 @@ node_modules/
 
 # Local-only working notes
 SCRATCH.md
+SCRATCHPAD.md
 
 # Eval run outputs (regenerable; definitions live in evals/<skill>/)
 evals/*/runs/
