@@ -146,3 +146,33 @@ notice). Load the skill when something clears its capture bar.
 ```
 
 Without it, explicit "park this" and on-demand lookup still work fully.
+
+## Development
+
+### Validating skills
+
+Every skill is validated in CI with [`skills-ref`](https://www.npmjs.com/package/skills-ref):
+
+```
+npx skills-ref validate skills/<name>/
+```
+
+This checks the `SKILL.md` frontmatter (e.g. the `description` must be ≤ 1024 characters).
+
+### Local validation hook
+
+This repo ships a Claude Code hook (`.claude/settings.json` →
+`.claude/hooks/validate-skill.ts`) that runs the same validation automatically
+whenever a `SKILL.md` is edited, so problems surface at edit time instead of in
+the PR.
+
+The hook is written in TypeScript and run with **[Bun](https://bun.sh)**, so Bun
+must be installed for it to run:
+
+```
+brew install oven-sh/bun/bun     # or: curl -fsSL https://bun.sh/install | bash
+```
+
+Without Bun, the hook errors on `SKILL.md` edits — install it, or remove the hook
+from `.claude/settings.json`. After first adding the repo, open `/hooks` once (or
+restart Claude Code) to activate it.
