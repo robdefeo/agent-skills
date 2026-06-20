@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/validate-skill.sh\"",
+            "command": "bun \"$CLAUDE_PROJECT_DIR/.claude/hooks/validate-skill.ts\"",
             "timeout": 60,
             "statusMessage": "Validating skill..."
           }
