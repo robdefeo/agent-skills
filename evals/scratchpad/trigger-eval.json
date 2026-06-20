@@ -1,0 +1,23 @@
+[
+  {"query": "park this — the websocket reconnect logic has no backoff and hammers the server on a drop, but I'm not touching it right now, mid-something-else", "should_trigger": true},
+  {"query": "jot down that the staging migration needs a manual backfill step before we cut over, i'll lose it otherwise", "should_trigger": true},
+  {"query": "ok note that somewhere: the /export endpoint 500s when the date range is over ~90 days. moving on for now though", "should_trigger": true},
+  {"query": "whats still open on my scratchpad?", "should_trigger": true},
+  {"query": "any parked notes or tasks about the billing service from the last few days?", "should_trigger": true},
+  {"query": "i keep noticing the config loader re-reads the file on every single request, that's wasteful. stick it on the list to look at later, not now", "should_trigger": true},
+  {"query": "promote that flaky-test note to a github issue and link it", "should_trigger": true},
+  {"query": "clean up the scratchpad — archive whatever's already done", "should_trigger": true},
+  {"query": "while you refactor the auth module, if you trip over anything clearly out of scope just keep a note of it so we don't lose it", "should_trigger": true},
+  {"query": "make a note that I should double-check whether the webhook retry path is actually idempotent", "should_trigger": true},
+  {"query": "that was unexpected, lets figure out how to work around it", "should_trigger":true},
+  {"query": "remember that I always want the linter run before any commit you make from now on", "should_trigger": false},
+  {"query": "save the prod database connection string location to memory so you know it next session", "should_trigger": false},
+  {"query": "where in my PARA vault should this signed vendor contract live — is that a resource or an area?", "should_trigger": false},
+  {"query": "create a github issue for the broken CSV export — here's the repro and the stack trace, file it now", "should_trigger": false},
+  {"query": "add a // TODO: handle the null tenant case comment above this function", "should_trigger": false},
+  {"query": "what are my open pull requests on the payments repo right now?", "should_trigger": false},
+  {"query": "write a docstring for parseConfig that explains the caching behavior", "should_trigger": false},
+  {"query": "remind me to kick off the deploy at 5pm today", "should_trigger": false},
+  {"query": "summarize the changes we made this session and drop them into the PR description", "should_trigger": false},
+  {"query": "take notes while I talk through the Q3 roadmap so I have a record of the meeting", "should_trigger": false}
+]
