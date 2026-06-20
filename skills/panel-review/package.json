@@ -1,0 +1,12 @@
+{
+  "name": "panel-review",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "scaffold": "bun run scripts/scaffold.ts",
+    "validate": "bun run scripts/validate.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
