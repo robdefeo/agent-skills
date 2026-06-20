@@ -1,0 +1,38 @@
+{
+  "skill_name": "panel-review",
+  "evals": [
+    {
+      "id": 1,
+      "name": "stress-test-prd-before-leadership",
+      "prompt": "I'm sending this PRD to leadership tomorrow morning asking them to approve a $200K Q3 budget. Can you stress test it from multiple angles before I hit send? Objectives are in OBJECTIVES.md next to the doc. Doc: evals/fixtures/integrations-budget-prd.md",
+      "expected_output": "Panel-review skill triggers. A {doc}.panel/ folder is created next to the PRD with README.md, personas/ (skeptic + target-reader + domain-expert + at least one objective-derived persona like cfo or ceo), and round-01/ containing index.md (with sha256), source.md (frozen copy), reviews/{persona}/findings/*.md, findings/*.md (consolidated, 1-3 sentence canonical bodies, sources point to review findings), consolidation.md (short index), human.md (empty annotation scaffold). Output is findings, not edits to the PRD.",
+      "files": [
+        "evals/fixtures/integrations-budget-prd.md",
+        "evals/fixtures/OBJECTIVES.md"
+      ],
+      "assertions": []
+    },
+    {
+      "id": 2,
+      "name": "explicit-slash-command-invocation",
+      "prompt": "/panel-review on evals/fixtures/integrations-budget-prd.md — objectives in evals/fixtures/OBJECTIVES.md",
+      "expected_output": "Same end-to-end outcome as eval 1: full round-01 produced. The explicit slash command invocation should NOT cause the skill to skip the persona-setup pause or the round-confirmation pause — these are load-bearing.",
+      "files": [
+        "evals/fixtures/integrations-budget-prd.md",
+        "evals/fixtures/OBJECTIVES.md"
+      ],
+      "assertions": []
+    },
+    {
+      "id": 3,
+      "name": "continuation-appends-round-02",
+      "prompt": "I addressed the round-01 findings on the integrations PRD and revised the doc. Can you run another round of panel review on the updated version? The panel folder already exists from last time.",
+      "expected_output": "Skill detects the existing {doc}.panel/ folder, asks once whether to continue, and on confirmation appends a round-02/ without re-creating personas or README. round-02 contains its own index.md (new sha256 since the doc changed), source.md (new frozen copy of revised doc), reviews/{persona}/findings/*.md, findings/*.md, consolidation.md, human.md. round-01 is untouched. Same panel personas are used unless the user requests changes.",
+      "files": [
+        "evals/fixtures/integrations-budget-prd.md",
+        "evals/fixtures/OBJECTIVES.md"
+      ],
+      "assertions": []
+    }
+  ]
+}
