@@ -1,0 +1,56 @@
+{
+  "skill_name": "scratchpad",
+  "evals": [
+    {
+      "id": 0,
+      "name": "explicit-capture-cold-start",
+      "prompt": "I'm in the middle of fixing the login redirect bug, but I just realized our session tokens never get rotated after sign-in — that's a real problem but it's out of scope right now. Park that so I don't lose it.",
+      "expected_output": "Creates SCRATCHPAD.md at the repo root containing one entry (most naturally a task, possibly discovery) about session token rotation, in the H1/H2 Active/H3 entry format with a timestamped `· <type>` heading. Ensures SCRATCHPAD.md is gitignored. Does NOT start fixing token rotation.",
+      "files": [
+        "fixtures/cold-start"
+      ],
+      "assertions": [
+        "Capture file is named SCRATCHPAD.md (skill convention)",
+        "Uses skill structure (# Scratchpad H1 + ## Active + ## Archive)",
+        "Entry heading uses '### YYYY-MM-DD HH:MM · <type>' with type task/discovery",
+        "Captured item is about session token rotation",
+        "SCRATCHPAD.md is gitignored (.gitignore lists it)",
+        "Parking only — no source code changes for token rotation"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "auto-capture-midtask",
+      "prompt": "Add basic input validation to the createUser function in src/users.js — reject empty or missing name/email before the insert.",
+      "expected_output": "Completes the in-scope validation task. ALSO silently parks the out-of-scope discovery that the query uses string concatenation (SQL-injection risk) into SCRATCHPAD.md as a discovery (and/or a task), printing a one-line `↳ parked in SCRATCHPAD:` notice. Does not derail into fixing the injection. Does not park trivia.",
+      "files": [
+        "fixtures/auto-capture"
+      ],
+      "assertions": [
+        "createUser validates & rejects empty/missing name and email before the INSERT",
+        "Out-of-scope SQL-injection issue was captured",
+        "Capture uses skill format (SCRATCHPAD.md with # Scratchpad + '### … · <type>' entry)",
+        "SCRATCHPAD.md is gitignored (.gitignore lists it)",
+        "SQL injection NOT fixed (string-concat INSERT still present) — scope respected",
+        "Inline 'parked in SCRATCHPAD' notice printed to the user (transparent capture)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "retrieve-lifecycle-promote",
+      "prompt": "What tasks are still open on my scratchpad? Mark the auth-guard one as done, and promote the flaky-CI task to a GitHub issue.",
+      "expected_output": "Lists the open (- [ ]) task entries. Ticks the auth-guard task to - [x] in place. For the flaky-CI task: drafts/creates a GitHub issue, moves the entry to the Archive section, and appends a `↳ promoted: issue #...` pointer line. Edits preserve the file format.",
+      "files": [
+        "fixtures/retrieve-promote"
+      ],
+      "assertions": [
+        "Auth-guard task marked done (- [x])",
+        "Auth-guard task remains in ## Active (ticked in place, not auto-archived)",
+        "Flaky-CI task moved to ## Archive",
+        "Flaky-CI entry has standardized '↳ promoted: issue #215' pointer line",
+        "A GitHub issue (title + body) was drafted in the reply",
+        "Other Active items (Stripe question, config idea) left intact"
+      ]
+    }
+  ]
+}

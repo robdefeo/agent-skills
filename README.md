@@ -118,3 +118,61 @@ npx skills add https://github.com/robdefeo/agent-skills --skill skill-scope
 - Splitting one skill into two or merging two into one
 - Deciding whether a workflow needs a new skill at all vs. extending an existing one
 - Resolving overlap between a proposed skill and an existing one
+
+### scratchpad
+
+Capture out-of-scope discoveries, ideas, tasks, and questions to a gitignored, per-repo `SCRATCHPAD.md` while you work — then retrieve, archive, or promote them later. A fast-capture inbox that sits *upstream* of durable memory and PARA: items get parked here without derailing the real task, and graduate to a permanent home when they outgrow it. Captures either explicitly ("park this") or silently with a one-line vetoable notice, against an inspectable per-type quality bar.
+
+**Installation:**
+
+```
+npx skills add https://github.com/robdefeo/agent-skills --skill scratchpad
+```
+
+**Use when:**
+
+- Parking an out-of-scope discovery, idea, task, or question mid-task so it isn't lost when the conversation ends
+- Looking up what you parked earlier ("what's open?", "any notes about auth?")
+- Marking parked tasks done, or cleaning up / archiving the scratchpad
+- Promoting a parked item to a GitHub issue, a memory, or a PARA project
+
+**Enabling auto-capture (optional):** auto-capture only fires while the skill is in context. To keep it active during unrelated work, add this pointer to a `CLAUDE.md` — `~/.claude/CLAUDE.md` for everywhere, or `./CLAUDE.md` for one repo (or just ask the skill to "set up scratchpad auto-capture"):
+
+```markdown
+<!-- scratchpad-auto-capture -->
+While working, capture genuinely out-of-scope discoveries, ideas, tasks, and
+questions per the `scratchpad` skill (park them in SCRATCHPAD.md, print a one-line
+notice). Load the skill when something clears its capture bar.
+```
+
+Without it, explicit "park this" and on-demand lookup still work fully.
+
+## Development
+
+### Validating skills
+
+Every skill is validated in CI with [`skills-ref`](https://www.npmjs.com/package/skills-ref):
+
+```
+npx skills-ref validate skills/<name>/
+```
+
+This checks the `SKILL.md` frontmatter (e.g. the `description` must be ≤ 1024 characters).
+
+### Local validation hook
+
+This repo ships a Claude Code hook (`.claude/settings.json` →
+`.claude/hooks/validate-skill.ts`) that runs the same validation automatically
+whenever a `SKILL.md` is edited, so problems surface at edit time instead of in
+the PR.
+
+The hook is written in TypeScript and run with **[Bun](https://bun.sh)**, so Bun
+must be installed for it to run:
+
+```
+brew install oven-sh/bun/bun     # or: curl -fsSL https://bun.sh/install | bash
+```
+
+Without Bun, the hook errors on `SKILL.md` edits — install it, or remove the hook
+from `.claude/settings.json`. After first adding the repo, open `/hooks` once (or
+restart Claude Code) to activate it.
