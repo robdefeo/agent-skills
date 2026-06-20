@@ -13,4 +13,9 @@ skills/*-workspace/
 
 skills-lock.json
 .agents
-.claude
+
+# Claude Code: commit the shared hook config + scripts; keep installed skills,
+# the commands cache, and personal overrides (settings.local.json) out.
+.claude/*
+!.claude/settings.json
+!.claude/hooks/
